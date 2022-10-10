@@ -1,0 +1,133 @@
+\documentclass[12pt]{article}
+\usepackage{graphics}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{alltt}
+\usepackage{array}	
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{verbatim}
+\usepackage{setspace}
+\usepackage{listings}
+
+\usepackage{amssymb,amsmath, amsthm}
+\usepackage{zed-csp}
+\usepackage[cc]{titlepic}
+
+\title{SOEN 331 (Section S):Formal Methods\\for Software Engineering\\
+\ \\
+Assignment 1}
+\author{Etienne Pham Do 40130483\\Hamzah Muhammad 40156621}
+\date{\today}
+\begin{spacing}{1.5}
+\begin{document}
+\maketitle
+
+
+
+\newpage
+\begin{enumerate}
+
+\item[4.1.]
+\begin{enumerate}
+    \item[1.]
+    \noindent $\forall a \exists b \ received\_request(a,b)$ \ (let this expression be A) translates to: "everyone received a request from someone".\\
+    \noindent $\exists b \forall a \ received\_request(a,b)$ \ (let this expression be B) translates to: "there is someone who sent a request to everyone".\\
+    \noindent For the 2 expressions to be logically equivalent, the biconditional of the 2 expressions must yield true. The conditional $B \rightarrow A$ must return true, which is the case. However, $A \rightarrow B$ is not true as it isn't necessarily true that there is someone who sent a request to everyone if everyone received a request from someone. Therefore, A and B are not logically equivalent.
+
+    \item[2.]
+    \noindent The statement $\forall a \exists b \ received\_request(a,b) \rightarrow \exists b \forall a \ received\_request(a,b)$ is false as there is a possibility that there isn't a person who sent a request to everyone.
+
+    \item[3.]
+    \noindent The statement $\exists b \forall a \ received\_request(a,b) \rightarrow \forall a \exists b \ received\_request(a,b)$ is true because if there is a person that sent a request to everyone then it must be true that everyone has received a request from someone.
+
+    \item[4.]
+    \noindent $\forall b \exists a \ received\_request(a,b)$ \ (let this expression be C) translates to: "everyone has sent a request to someone".\\
+    \noindent $\exists a \forall b \ received\_request(a,b)$ \ (let this expression be D) translates to: "there is someone who has received a request from everyone".\\
+    \noindent The two expressions are not logically equivalent.
+\end{enumerate}
+
+\item[4.2.]
+\begin{enumerate}
+    \item[1.]
+    \noindent "There are some nice people" translates to "Some people are not bad.", which is type O.
+    \item[2.]
+    \noindent "There are no nice people" translates to "All people are bad", which is type A.
+    \item[3.]
+    \noindent "Everybody is bad" translates to "All people are bad", which is type A.
+    \item[4.]
+    \noindent "Some people are bad" is type I.
+    \item[5.]
+    \noindent "Everybody is nice" translates to "No people are bad", which is type E.
+    \item[6.]
+    \noindent "Some people are not nice" translates to "Some people are bad", which is type I.
+\end{enumerate}
+\item[4.3.]
+\begin{enumerate}
+    \item[1.]
+    \noindent The declaration My\_OS : $\mathbb{P}$OS is acceptable because it means that the variable My\_OS can represent any value within the power set of OS. In this case, My\_OS contains \{BSD, Unix\}, which is a subset of the power set that contains all possible subsets of OS.
+    \item[2.]
+    \noindent The declaration $\mathbb{P}$OS is a legitimate type as it is simply a domain for any variable that represents a set (the power set of OS is the set of all subsets of OS).
+    \item[3.]
+    \noindent The declaration My\_OS : OS entails that the variable My\_OS can represent any value within the set OS. This statement is not acceptable as the value of My\_OS is a set and the set OS does not contain sets, only atomic elements.
+    \item[4.]
+    \noindent $MacOS \notin \mathbb{P}OS$ because $\mathbb{P}OS$ is a set, where its elements are sets, whereas MacOS is not - it is simply an atomic variable.
+    \item[5.]
+    \noindent OS, which is a set of atomic elements, is a legitimate type as it is simply a domain for any atomic variable.
+    \item[6.]
+    \noindent $\{\}\in \mathbb{P}OS$ because $\mathbb{P}OS$ is a set that contains all subsets of OS, including the empty set.
+    \item[7.]
+    \noindent $\{Linux, BSD\}\in \mathbb{P}OS$ because $\mathbb{P}OS$ is a set that contains all subsets of OS, including the set \{Linux, BSD\}.
+    \item[8.]
+    \noindent $\{\{\}\}\notin \mathbb{P}OS$ because the set containing the empty set is not a part of all the subsets of OS.
+    \item[9.]
+    \noindent $\{\}\notin \mathbb{}OS$ because the empty set is not an element in $\mathbb{}OS$.
+    \item[10.]
+    \noindent  $\{\}$ is a legitimate value for variable My\_Computer because the empty set is a subset of the power set of OS.
+    \item[11.]
+    \noindent Yes.
+    \item[12.]
+    \noindent $\{\{BSD, MacOS\}\}$ is a subset of $\mathbb{P}OS$ because $\mathbb{P}OS$ is a set that contains all subsets of OS and $\{\{BSD, MacOS\}\}$ is a set containing one of those subsets .
+    \item[13.]
+    \noindent My\_OS is not a subset of $\mathbb{P}OS$ because the powerset is a set of sets, therefore any subset of $\mathbb{P}OS$ must have to be a set of sets and variable My\_OS is a set of atomic elements.
+    \item[14.]
+    \noindent $\{\{BSD, MacOS\}\}\notin \mathbb{P}OS$ because the set containing the set \{BSD, MacOS\} is not a part of all the subsets of OS.
+\end{enumerate}
+\item[4.4.]
+\begin{enumerate}
+    \item[1.]
+    \noindent map is a binary relation because the set of Flight is only mapped to another set: Airline, with the relation "is associated to". In other words, map can be described as a set of ordered pairs.
+    \item[2.]
+    \noindent map is a function because the set Flight is the domain, which is mapped to the set Airline that represents the codomain. The type of the function is surjective.
+    \item[3.]
+    \noindent The precondition for operation add is as follows: $flight \notin dom airline$.
+    \item[4.]
+    \noindent $airline' = airline \ \cup \{flight?\mapsto airline?\}$ or $airline' = airline \ \oplus \{flight?\mapsto airline?\}$
+    \item[5.]
+    \noindent The result of calling that operation would be precondition failure and the pair will not be added to the relation.
+    \item[6.]
+    \noindent The result of calling that operation would be a violation of the requirements (R2:  Each flight is associated to a single airline, e.g. AA333 is an American Airlines flight). Thus, the call should be rejected and no pair is added to the relation. 
+    \item[7.]
+    \noindent It cam only be used if no record already exists whose first coordinate is identical to the corresponding one of the input. Otherwise, another record will be added with the same first coordinate causing a violation of the requirements.
+    \item[8.]
+    \noindent The definition for the core functionality of operation delete is 
+    $map' = map \nrres\{flight?\}$
+\end{enumerate}
+\item[4.5.]
+\begin{enumerate}
+    \item[1.]
+    \noindent $\{A330,747\} \lhd airplanes \ = \{A330 \mapsto Airbus, 747 \mapsto Boeing\}$
+    \item[2.]
+    \noindent $airplanes \rhd \{Comac, Embraer\} \ = \{C919 \mapsto Comac, E170 \mapsto Embraer, E175 \mapsto Embraer\}$
+    \item[3.]
+    \noindent $\{A320, A330, A350, E170\} \ndres airplanes \ = \{A380 \mapsto Airbus, 737 \mapsto Boeing, 747 \mapsto Boeing, Superjet100 \mapsto Sukhoi, C919 \mapsto Comac, Global7500 \mapsto Bombardier, Global8000 \mapsto Bombardier, E175 \mapsto Embraer\}$
+    \item[4.] 
+    \noindent $airplanes \nrres \{Airbus, Boeing\} \ = \{Superjet100 \mapsto Sukhoi, C919 \mapsto Comac, Global7500 \mapsto Bombardier, Global8000 \mapsto Bombardier, E170 \mapsto Embraer, E175 \mapsto Embraer\}$
+    \item[5.]
+    \noindent $airplanes\oplus\{Su\_80\mapsto Sukhoi\} \ = \{A320 \mapsto Airbus, A330 \mapsto Airbus, A350 \mapsto Airbus, A380 \mapsto Airbus, 737 \mapsto Boeing, 747 \mapsto Boeing, Su\_80 \mapsto Sukhoi, Superjet100 \mapsto Sukhoi, C919 \mapsto Comac, Global7500 \mapsto Bombardier, Global8000 \mapsto Bombardier, E170 \mapsto Embraer, E175 \mapsto Embraer\}$
+\end{enumerate}
+
+\end{enumerate}
+
+\end{spacing}
+
+\end{document}
