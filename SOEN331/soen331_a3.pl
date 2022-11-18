@@ -17,3 +17,18 @@ transition(reading, emergency, null, 'currentTemp >= tempThresh, currentCo >= co
 transition(reading, idle, null, 'elapsedTime >= 15s', 'switch off LEDs').
 transition(emergency, reading, reset, null, null).
 
+
+get_system_actions(ActionList) :-
+    findall(Action,
+            (transition(_,_,_,_,Action), 
+            (Action \= 'null')),
+            ActionList).
+
+            
+get_event_guard_by_pair(S,D,CriteriaList) :-
+    findall([E,G],
+            (transition(S,D,E,G,_),
+                E \= 'null',
+                G \= 'null'),
+    		CriteriaList).
+                     
