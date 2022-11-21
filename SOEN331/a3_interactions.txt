@@ -1,0 +1,28 @@
+Etienne Pham Do 40130483
+Hamzah Muhammad 40156621
+
+get_legal_events_by_mode(idle, E).
+E = [configure, read, 'shut off']
+
+get_system_actions(A).
+A = ['switch off LEDs', 'switch off LEDs', 'switch off LEDs']
+
+get_event_guard_by_pair(configuration,reading,C).
+C = [
+[
+configure,
+'coThresh <= 120 && coThresh >= 100, tempThresh > currentTemp'
+]
+]
+
+get_system_state_pairs(P).
+P = [
+[idle, configuration],
+[idle, reading],
+[idle, exit],
+[configuration, reading],
+[reading, configuration],
+[reading, emergency],
+[reading, idle],
+[emergency, reading]
+]
